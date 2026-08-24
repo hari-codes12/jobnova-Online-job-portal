@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>saved jobs | JOBNOVA</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", sans-serif;
+        }
+
+        body {
+            background:
+                    radial-gradient(circle at top left, #2563eb, transparent 30%),
+                    radial-gradient(circle at bottom right, #7c3aed, transparent 30%),
+                    #0f172a;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            height: 70px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+        }
+
+        .logo {
+            color: #2563eb;
+            font-size: 22px;
+            font-weight: 800;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #475569;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 10px 14px;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .heading {
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            font-size: 30px;
+            color: #0f172a;
+        }
+
+        .heading p {
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        #savedJobs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            gap: 22px;
+        }
+
+        .job-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, .06);
+        }
+
+        .job-card h2 {
+            color: #0f172a;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .company {
+            color: #64748b;
+            margin-bottom: 18px;
+        }
+
+        .job-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .info {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .info i {
+            color: #2563eb;
+            width: 20px;
+        }
+
+        .description {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 20px;
+        }
+
+        .skill-tag {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .remove-btn {
+            width: 100%;
+            padding: 12px;
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .remove-btn:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        .empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            background: white;
+            padding: 60px 20px;
+            border-radius: 16px;
+            color: #64748b;
+        }
+
+        .empty i {
+            font-size: 50px;
+            color: #cbd5e1;
+            margin-bottom: 15px;
+        }
+
+        .empty h2 {
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        footer {
+            text-align: center;
+            margin: 50px 0 20px;
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .job-info {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <i class="fas fa-briefcase"></i>
+
+        JOBNOVA
+
+    </div>
+
+    <div class="nav-links">
+
+        <a href="home.html">
+
+            <i class="fas fa-home"></i>
+
+            Home
+
+        </a>
+
+        <a href="jobs.html">
+
+            <i class="fas fa-briefcase"></i>
+
+            Jobs
+
+        </a>
+
+    </div>
+
+</nav>
+
+<main class="container">
+
+    <div class="heading">
+
+        <h1>
+
+            <i class="fas fa-bookmark"></i>
+
+            Saved Jobs
+
+        </h1>
+
+        <p>
+
+            Jobs you saved for later.
+
+        </p>
+
+    </div>
+
+    <div id="savedJobs"></div>
+
+</main>
+
+<footer>
+
+    © 2026 JOBNOVA · Empowering Careers 🚀
+
+</footer>
+
+<script>
+
+    function getSavedJobs() {
+
+        return JSON.parse(
+            localStorage.getItem("savedJobs")
+        ) || [];
+
+    }
+
+
+    function displaySavedJobs() {
+
+        const container =
+
+            document.getElementById("savedJobs");
+
+
+        const savedJobs =
+
+            getSavedJobs();
+
+
+        container.innerHTML = "";
+
+
+        if (savedJobs.length === 0) {
+
+            container.innerHTML = `
+
+                <div class="empty">
+
+                    <i class="fas fa-bookmark"></i>
+
+                    <h2>No Saved Jobs</h2>
+
+                    <p>
+
+                        Go to Jobs and save jobs you are interested in.
+
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        savedJobs.forEach((job, index) => {
+
+            const skills = job.skills
+
+                ? job.skills.split(",")
+
+                : [];
+
+
+            const card = `
+
+                <div class="job-card">
+
+                    <h2>
+
+                        ${job.title || "Job Position"}
+
+                    </h2>
+
+
+                    <p class="company">
+
+                        <i class="fas fa-building"></i>
+
+                        ${job.company || "Company"}
+
+                    </p>
+
+
+                    <div class="job-info">
+
+                        <div class="info">
+
+                            <i class="fas fa-location-dot"></i>
+
+                            ${job.location || "Not specified"}
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <i class="fas fa-briefcase"></i>
+
+                            ${job.experience || "Fresher"}
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <i class="fas fa-graduation-cap"></i>
+
+                            ${job.education || "Any Degree"}
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <i class="fas fa-money-bill"></i>
+
+                            ${job.salary || "Not disclosed"}
+
+                        </div>
+
+                    </div>
+
+
+                    <p class="description">
+
+                        ${job.description || "No description available"}
+
+                    </p>
+
+
+                    <div class="skills">
+
+                        ${skills.map(skill => `
+
+                            <span class="skill-tag">
+
+                                ${skill.trim()}
+
+                            </span>
+
+                        `).join("")}
+
+                    </div>
+
+
+                    <button
+
+                        class="remove-btn"
+
+                        onclick="removeJob(${index})">
+
+                        <i class="fas fa-trash"></i>
+
+                        Remove from Saved Jobs
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            container.innerHTML += card;
+
+        });
+
+    }
+
+
+    function removeJob(index) {
+
+        let savedJobs =
+
+            getSavedJobs();
+
+
+        savedJobs.splice(index, 1);
+
+
+        localStorage.setItem(
+            "savedJobs",
+
+            JSON.stringify(savedJobs)
+        );
+
+
+        displaySavedJobs();
+
+
+        alert("Job removed from Saved Jobs");
+
+    }
+
+
+    displaySavedJobs();
+
+</script>
+
+</body>
+
+</html>

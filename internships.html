@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Internships | JOBNOVA</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", sans-serif;
+        }
+
+        body {
+            background: #e0e7ff;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 70px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+        }
+
+        .logo {
+            color: #2563eb;
+            font-size: 22px;
+            font-weight: 800;
+
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #475569;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            padding: 10px 16px;
+            border-radius: 8px;
+
+            transition: .3s;
+        }
+
+        .back-btn:hover {
+            color: #2563eb;
+            background: #eff6ff;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .heading h1 {
+            font-size: 30px;
+            color: #0f172a;
+        }
+
+        .heading p {
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        /* SEARCH */
+
+        .search-box {
+            margin: 28px 0;
+
+            display: flex;
+            gap: 12px;
+        }
+
+        .search-box input {
+            flex: 1;
+
+            padding: 14px 18px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: #2563eb;
+        }
+
+        .search-box button {
+            padding: 0 25px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: #2563eb;
+            color: white;
+
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .search-box button:hover {
+            background: #1d4ed8;
+        }
+
+        /* INTERNSHIP GRID */
+
+        #internships {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(330px, 1fr));
+
+            gap: 22px;
+        }
+
+        /* CARD */
+
+        .internship-card {
+
+            background: white;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 16px;
+
+            padding: 24px;
+
+            box-shadow: 0 8px 25px rgba(15, 23, 42, .06);
+
+            transition: .3s;
+        }
+
+        .internship-card:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow: 0 15px 35px rgba(15, 23, 42, .12);
+        }
+
+        .internship-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            gap: 15px;
+        }
+
+        .internship-header h2 {
+
+            font-size: 19px;
+
+            color: #0f172a;
+        }
+
+        .company {
+
+            margin-top: 7px;
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+        .internship-type {
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+        .internship-info {
+
+            margin: 20px 0;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 12px;
+        }
+
+        .info {
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+        .info i {
+
+            color: #16a34a;
+
+            width: 20px;
+        }
+
+        .description {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            margin-bottom: 20px;
+        }
+
+        /* VIEW DETAILS BUTTON */
+
+        .details-btn {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 12px;
+
+            border-radius: 9px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .details-btn:hover {
+
+            background: #1d4ed8;
+        }
+
+        /* MODAL */
+
+        .modal {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(15, 23, 42, .65);
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            z-index: 1000;
+        }
+
+        .modal-content {
+
+            background: white;
+
+            width: 100%;
+
+            max-width: 600px;
+
+            border-radius: 18px;
+
+            padding: 30px;
+
+            position: relative;
+        }
+
+        .close {
+
+            position: absolute;
+
+            right: 22px;
+
+            top: 18px;
+
+            font-size: 24px;
+
+            color: #64748b;
+
+            cursor: pointer;
+        }
+
+        .modal-content h2 {
+
+            color: #0f172a;
+
+            margin-bottom: 8px;
+        }
+
+        .modal-company {
+
+            color: #64748b;
+
+            margin-bottom: 25px;
+        }
+
+        .detail-box {
+
+            background: #f8fafc;
+
+            border: 1px solid #e2e8f0;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            margin-bottom: 14px;
+        }
+
+        .detail-box span {
+
+            display: block;
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            margin-bottom: 6px;
+        }
+
+        .detail-box strong {
+
+            color: #0f172a;
+
+            font-size: 14px;
+        }
+
+        .modal-section {
+
+            margin-top: 20px;
+        }
+
+        .modal-section h3 {
+
+            color: #0f172a;
+
+            font-size: 16px;
+
+            margin-bottom: 8px;
+        }
+
+        .modal-section p {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+        /* APPLY BUTTON */
+
+        .apply-btn {
+
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #16a34a;
+
+            color: white;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .apply-btn:hover {
+
+            background: #15803d;
+        }
+
+        footer {
+
+            text-align: center;
+
+            margin: 50px 0 20px;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+
+            .search-box {
+
+                flex-direction: column;
+            }
+
+            .search-box button {
+
+                padding: 13px;
+            }
+
+            .internship-info {
+
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+
+                padding: 0 20px;
+            }
+
+            .logo {
+
+                font-size: 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <i class="fas fa-graduation-cap"></i>
+
+        JOBNOVA
+
+    </div>
+
+    <a href="home.html" class="back-btn">
+
+        <i class="fas fa-arrow-left"></i>
+
+        Back to Home
+
+    </a>
+
+</nav>
+
+
+<main class="container">
+
+    <div class="heading">
+
+        <h1>Find Your Internship</h1>
+
+        <p>
+
+            Explore internships and start building your professional career.
+
+        </p>
+
+    </div>
+
+
+    <div class="search-box">
+
+        <input
+
+                id="searchInput"
+
+                placeholder="Search by internship, company or location..."
+
+                onkeyup="searchInternships()">
+
+
+        <button onclick="searchInternships()">
+
+            <i class="fas fa-search"></i>
+
+            Search
+
+        </button>
+
+    </div>
+
+
+    <div id="internships"></div>
+
+</main>
+
+
+<!-- INTERNSHIP DETAILS MODAL -->
+
+<div class="modal" id="internshipModal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeModal()">
+
+            &times;
+
+        </span>
+
+
+        <h2 id="modal-title">
+
+            Internship Title
+
+        </h2>
+
+
+        <p class="modal-company" id="modal-company">
+
+            Company
+
+        </p>
+
+
+        <div class="detail-box">
+
+            <span>
+
+                <i class="fas fa-location-dot"></i>
+
+                Location
+
+            </span>
+
+            <strong id="modal-location">
+
+                -
+
+            </strong>
+
+        </div>
+
+
+        <div class="modal-section">
+
+            <h3>
+
+                Internship Description
+
+            </h3>
+
+            <p id="modal-description">
+
+                -
+
+            </p>
+
+        </div>
+
+
+        <button class="apply-btn"
+
+                onclick="applyInternship()">
+
+            <i class="fas fa-paper-plane"></i>
+
+            Apply for Internship
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    © 2026 JOBNOVA · Empowering Careers 🚀
+
+</footer>
+
+
+<script>
+
+    let selectedInternship = null;
+
+
+    /* FETCH INTERNSHIPS */
+
+    async function fetchInternships() {
+
+        try {
+
+            const response =
+
+                await fetch("/api/internships");
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Failed to fetch internships"
+                );
+
+            }
+
+
+            const internships =
+
+                await response.json();
+
+
+            displayInternships(internships);
+
+        } catch (error) {
+
+            console.error(error);
+
+
+            document
+
+                .getElementById("internships")
+
+                .innerHTML =
+
+                "<p>Unable to load internships. Please try again.</p>";
+
+        }
+
+    }
+
+
+    /* DISPLAY INTERNSHIPS */
+
+    function displayInternships(internships) {
+
+        const container =
+
+            document
+
+                .getElementById("internships");
+
+
+        container.innerHTML = "";
+
+
+        if (!internships || internships.length === 0) {
+
+            container.innerHTML =
+
+                "<p>No internships found.</p>";
+
+            return;
+
+        }
+
+
+        internships.forEach(internship => {
+
+
+            const card = `
+
+                <div class="internship-card">
+
+                    <div class="internship-header">
+
+                        <div>
+
+                            <h2>
+
+                                ${internship.title || "Internship"}
+
+                            </h2>
+
+                            <div class="company">
+
+                                <i class="fas fa-building"></i>
+
+                                ${internship.company || "Company"}
+
+                            </div>
+
+                        </div>
+
+                        <span class="internship-type">
+
+                            Internship
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="internship-info">
+
+                        <div class="info">
+
+                            <i class="fas fa-location-dot"></i>
+
+                            ${internship.location || "Not specified"}
+
+                        </div>
+
+                        <div class="info">
+
+                            <i class="fas fa-graduation-cap"></i>
+
+                            Students / Freshers
+
+                        </div>
+
+                    </div>
+
+
+                    <p class="description">
+
+                        ${internship.description || "No description available"}
+
+                    </p>
+
+
+                    <button
+
+                        class="details-btn"
+
+                        onclick='viewDetails(${JSON.stringify(internship)})'>
+
+                        <i class="fas fa-eye"></i>
+
+                        View Details
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            container.innerHTML += card;
+
+        });
+
+    }
+
+
+    /* VIEW DETAILS */
+
+    function viewDetails(internship) {
+
+        selectedInternship = internship;
+
+
+        document
+
+            .getElementById("modal-title")
+
+            .innerText =
+
+            internship.title || "Internship";
+
+
+        document
+
+            .getElementById("modal-company")
+
+            .innerText =
+
+            internship.company || "Company";
+
+
+        document
+
+            .getElementById("modal-location")
+
+            .innerText =
+
+            internship.location || "Not specified";
+
+
+        document
+
+            .getElementById("modal-description")
+
+            .innerText =
+
+            internship.description ||
+
+            "No description available";
+
+
+        document
+
+            .getElementById("internshipModal")
+
+            .style.display =
+
+            "flex";
+
+    }
+
+
+    /* CLOSE MODAL */
+
+    function closeModal() {
+
+        document
+
+            .getElementById("internshipModal")
+
+            .style.display =
+
+            "none";
+
+    }
+
+
+    /* APPLY INTERNSHIP */
+
+    function applyInternship() {
+
+        if (!selectedInternship) {
+
+            alert(
+                "Please select an internship first."
+            );
+
+            return;
+
+        }
+
+
+        localStorage.setItem(
+            "selectedInternship",
+
+            JSON.stringify(selectedInternship)
+        );
+
+
+        window.location.href =
+
+            "apply.html";
+
+    }
+
+
+    /* SEARCH */
+
+    async function searchInternships() {
+
+        const query =
+
+            document
+
+                .getElementById("searchInput")
+
+                .value
+
+                .toLowerCase()
+
+                .trim();
+
+
+        try {
+
+            const response =
+
+                await fetch("/api/internships");
+
+
+            const internships =
+
+                await response.json();
+
+
+            const filtered =
+
+                internships.filter(internship =>
+
+                    (internship.title || "")
+
+                        .toLowerCase()
+
+                        .includes(query)
+
+                    ||
+
+                    (internship.company || "")
+
+                        .toLowerCase()
+
+                        .includes(query)
+
+                    ||
+
+                    (internship.location || "")
+
+                        .toLowerCase()
+
+                        .includes(query)
+                );
+
+
+            displayInternships(filtered);
+
+        } catch (error) {
+
+            console.error(error);
+
+        }
+
+    }
+
+
+    /* CLOSE MODAL WHEN CLICK OUTSIDE */
+
+    window.onclick =
+
+        function (event) {
+
+            const modal =
+
+                document
+
+                    .getElementById(
+                        "internshipModal"
+                    );
+
+
+            if (event.target === modal) {
+
+                closeModal();
+
+            }
+
+        };
+
+
+    /* LOAD INTERNSHIPS */
+
+    fetchInternships();
+
+</script>
+
+</body>
+
+</html>

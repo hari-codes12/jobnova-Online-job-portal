@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certifications | JOBNOVA Enterprise</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: #eff6ff;
+            --secondary: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --bg-main: #f8fafc;
+            --card-bg: #ffffff;
+            --danger: #ef4444;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 20px -2px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 20px 25px -5px rgba(15, 23, 42, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            height: 72px;
+            padding: 0 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--primary);
+            font-size: 22px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: var(--primary);
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            list-style: none;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item a:hover, .nav-item a.active {
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .admin-nav-btn {
+            border: none;
+            padding: 10px 16px;
+            border-radius: 10px;
+            background: var(--secondary);
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 60px 20px 40px;
+            text-align: center;
+            background: radial-gradient(circle at 50% 0%, #eff6ff 0%, #f8fafc 70%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            color: var(--secondary);
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        /* CONTROLS & ACTIONS */
+        .controls-wrapper {
+            max-width: 1100px;
+            margin: 30px auto 0;
+            padding: 0 20px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 280px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-box i { color: #94a3b8; }
+
+        #search {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-add-cert {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: none; /* Admin லாக் இன் செய்தால் மட்டும் தெரியும் */
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-add-cert:hover {
+            background: #15803d;
+        }
+
+        /* METRICS */
+        .stats {
+            max-width: 1100px;
+            margin: 30px auto 0;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            padding: 20px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stat-card i { color: var(--primary); font-size: 24px; margin-bottom: 8px; }
+        .stat-card h3 { color: var(--secondary); font-size: 24px; font-weight: 800; }
+        .stat-card p { color: var(--text-muted); font-size: 13px; }
+
+        /* CERTIFICATION GRID */
+        .cert-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto 80px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
+        .cert-card {
+            position: relative;
+            padding: 28px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .cert-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .badge-verified {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 12px;
+            border-radius: 30px;
+            background: #f0fdf4;
+            color: #166534;
+            font-size: 11px;
+            font-weight: 700;
+            border: 1px solid #bbf7d0;
+        }
+
+        .cert-card h3 {
+            color: var(--secondary);
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .issuer {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .cert-description {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .view-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: 10px;
+            background: var(--primary-light);
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .delete-btn {
+            padding: 12px 16px;
+            border-radius: 10px;
+            background: #fee2e2;
+            color: var(--danger);
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            display: none; /* Visible only for Admin */
+        }
+
+        /* MODALS */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(6px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-box {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            width: 90%;
+            max-width: 440px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            font-size: 14px;
+            outline: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 24px;
+            text-align: center;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            font-size: 13px;
+            background: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="home.html" class="logo">
+        <div class="logo-icon"><i class="fas fa-briefcase"></i></div>
+        JOBNOVA
+    </a>
+
+    <ul class="nav-menu">
+        <li class="nav-item"><a href="home.html"><i class="fas fa-house"></i> <span>Home</span></a></li>
+        <li class="nav-item"><a href="certifications.html" class="active"><i class="fas fa-certificate"></i> <span>Certifications</span></a></li>
+        <li class="nav-item">
+            <button class="admin-nav-btn" onclick="openAdminModal()" id="adminBtn">
+                <i class="fas fa-user-shield"></i> <span id="adminBtnText">Admin Login</span>
+            </button>
+        </li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>Professional Certifications</h1>
+    <p>Enterprise-verified certifications and credentials showcase.</p>
+
+    <div class="controls-wrapper">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input id="search" type="text" placeholder="Search certification..." oninput="searchCerts()">
+        </div>
+
+        <div class="action-btns">
+            <!-- Admin Only Add Button -->
+            <button class="btn-add-cert" id="addCertBtn" onclick="openAddCertModal()">
+                <i class="fas fa-plus"></i> Add Certificate
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- METRICS -->
+<div class="stats">
+    <div class="stat-card">
+        <i class="fas fa-certificate"></i>
+        <h3 id="totalCerts">0</h3>
+        <p>Active Credentials</p>
+    </div>
+    <div class="stat-card">
+        <i class="fas fa-building"></i>
+        <h3>50+</h3>
+        <p>Issuing Partners</p>
+    </div>
+    <div class="stat-card">
+        <i class="fas fa-circle-check"></i>
+        <h3>100%</h3>
+        <p>Verified</p>
+    </div>
+</div>
+
+<!-- GRID CONTAINER -->
+<div class="cert-container" id="certs"></div>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="modal-overlay" id="adminModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h2><i class="fas fa-lock"></i> Admin Login</h2>
+            <i class="fas fa-times" style="cursor:pointer;" onclick="closeAdminModal()"></i>
+        </div>
+        <form onsubmit="handleAdminLogin(event)">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="adminUser" placeholder="admin" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="adminPass" placeholder="admin123" required>
+            </div>
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+    </div>
+</div>
+
+<!-- ADD CERTIFICATE MODAL (ADMIN ONLY) -->
+<div class="modal-overlay" id="addCertModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h2><i class="fas fa-plus-circle"></i> Add New Certificate</h2>
+            <i class="fas fa-times" style="cursor:pointer;" onclick="closeAddCertModal()"></i>
+        </div>
+        <form onsubmit="handleAddNewCert(event)">
+            <div class="form-group">
+                <label>Certification Name</label>
+                <input type="text" id="certName" placeholder="e.g. AWS Solutions Architect" required>
+            </div>
+            <div class="form-group">
+                <label>Issuer Name</label>
+                <input type="text" id="certIssuer" placeholder="e.g. Amazon Web Services" required>
+            </div>
+            <div class="form-group">
+                <label>Credential / Project Link</label>
+                <input type="url" id="certUrl" placeholder="https://..." required>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="certDesc" rows="3" placeholder="Brief details about the certification..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Save Certificate</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    © 2026 JOBNOVA | Enterprise Career Management System 🚀
+</footer>
+
+<script>
+    let defaultCertifications = [
+        {
+            id: 1,
+            name: "AWS Certified Solutions Architect",
+            issuer: "Amazon Web Services (AWS)",
+            description: "Demonstrates expertise in designing resilient and cost-optimized cloud architectures.",
+            credentialUrl: "https://aws.amazon.com/certification/"
+        },
+        {
+            id: 2,
+            name: "Google Professional Data Engineer",
+            issuer: "Google Cloud Platform",
+            description: "Validates ability to design and maintain data processing systems.",
+            credentialUrl: "https://cloud.google.com/certification/"
+        },
+        {
+            id: 3,
+            name: "Meta Front-End Developer",
+            issuer: "Meta",
+            description: "Covers modern web development using React, JavaScript, and HTML5/CSS3.",
+            credentialUrl: "https://www.coursera.org/"
+        }
+    ];
+
+    // Load from LocalStorage or use defaults
+    let certifications = JSON.parse(localStorage.getItem('myCerts')) || defaultCertifications;
+
+    window.addEventListener('DOMContentLoaded', () => {
+        checkAdminState();
+        displayCerts(certifications);
+    });
+
+    function checkAdminState() {
+        const isAdmin = localStorage.getItem("isAdminLoggedIn") === "true";
+        const adminBtnText = document.getElementById("adminBtnText");
+        const adminBtn = document.getElementById("adminBtn");
+        const addCertBtn = document.getElementById("addCertBtn");
+
+        if (isAdmin) {
+            adminBtnText.innerText = "Logout Admin";
+            adminBtn.style.background = "var(--danger)";
+            addCertBtn.style.display = "inline-flex";
+        } else {
+            adminBtnText.innerText = "Admin Login";
+            adminBtn.style.background = "var(--secondary)";
+            addCertBtn.style.display = "none";
+        }
+        displayCerts(certifications);
+    }
+
+    function openAdminModal() {
+        if (localStorage.getItem("isAdminLoggedIn") === "true") {
+            if (confirm("Log out from Admin mode?")) {
+                localStorage.removeItem("isAdminLoggedIn");
+                checkAdminState();
+            }
+        } else {
+            document.getElementById('adminModal').style.display = 'flex';
+        }
+    }
+
+    function closeAdminModal() {
+        document.getElementById('adminModal').style.display = 'none';
+    }
+
+    function handleAdminLogin(e) {
+        e.preventDefault();
+        const user = document.getElementById('adminUser').value.trim();
+        const pass = document.getElementById('adminPass').value.trim();
+
+        if (user === "admin" && pass === "admin123") {
+            localStorage.setItem("isAdminLoggedIn", "true");
+            alert("Admin Access Granted! 🎉");
+            closeAdminModal();
+            checkAdminState();
+        } else {
+            alert("Invalid Credentials! (User: admin / Pass: admin123)");
+        }
+    }
+
+    function openAddCertModal() {
+        document.getElementById('addCertModal').style.display = 'flex';
+    }
+
+    function closeAddCertModal() {
+        document.getElementById('addCertModal').style.display = 'none';
+    }
+
+    function handleAddNewCert(e) {
+        e.preventDefault();
+        const newCert = {
+            id: Date.now(),
+            name: document.getElementById('certName').value,
+            issuer: document.getElementById('certIssuer').value,
+            credentialUrl: document.getElementById('certUrl').value,
+            description: document.getElementById('certDesc').value
+        };
+
+        certifications.push(newCert);
+        localStorage.setItem('myCerts', JSON.stringify(certifications));
+        closeAddCertModal();
+        displayCerts(certifications);
+        alert("New Certificate Added Successfully!");
+    }
+
+    function deleteCert(id) {
+        if (confirm("Are you sure you want to delete this certificate?")) {
+            certifications = certifications.filter(c => c.id !== id);
+            localStorage.setItem('myCerts', JSON.stringify(certifications));
+            displayCerts(certifications);
+        }
+    }
+
+    function displayCerts(certs) {
+        const container = document.getElementById("certs");
+        const isAdmin = localStorage.getItem("isAdminLoggedIn") === "true";
+        container.innerHTML = "";
+
+        document.getElementById("totalCerts").innerText = certs.length;
+
+        certs.forEach(cert => {
+            const card = `
+                <div class="cert-card">
+                    <div>
+                        <div class="card-header">
+                            <div class="cert-icon"><i class="fas fa-award"></i></div>
+                            <span class="badge-verified"><i class="fas fa-check-circle"></i> VERIFIED</span>
+                        </div>
+                        <h3>${cert.name}</h3>
+                        <div class="issuer"><i class="fas fa-building"></i> ${cert.issuer}</div>
+                        <p class="cert-description">${cert.description}</p>
+                    </div>
+                    <div class="card-actions">
+                        <a href="${cert.credentialUrl}" target="_blank" class="view-btn">
+                            <i class="fas fa-external-link-alt"></i> View Link
+                        </a>
+                        ${isAdmin ? `<button class="delete-btn" style="display:inline-block;" onclick="deleteCert(${cert.id})"><i class="fas fa-trash"></i></button>` : ''}
+                    </div>
+                </div>`;
+            container.innerHTML += card;
+        });
+    }
+
+    function searchCerts() {
+        const query = document.getElementById("search").value.toLowerCase();
+        const filtered = certifications.filter(c =>
+            c.name.toLowerCase().includes(query) ||
+            c.issuer.toLowerCase().includes(query)
+        );
+        displayCerts(filtered);
+    }
+</script>
+
+</body>
+</html>

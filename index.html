@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | JOBNOVA</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", sans-serif;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 25px;
+
+            background: radial-gradient(
+                    circle at top left,
+                    #1e3a8a,
+                    transparent 35%
+            ),
+            radial-gradient(
+                    circle at bottom right,
+                    #312e81,
+                    transparent 35%
+            ),
+            #0b1120;
+
+        }
+
+        /* ================= LOGIN CARD ================= */
+
+        .login-card {
+
+            width: 100%;
+
+            max-width: 470px;
+
+            min-height: 650px;
+
+            padding: 45px 55px;
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+
+            border-radius: 22px;
+
+            background: linear-gradient(
+                    145deg,
+                    rgba(30, 41, 59, 0.96),
+                    rgba(15, 23, 42, 0.98)
+            );
+
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+        }
+
+        /* ================= LOGO ================= */
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+
+            color: #f8fafc;
+
+            font-size: 27px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+        }
+
+        .logo-icon {
+
+            width: 48px;
+
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 13px;
+
+            color: white;
+
+            background: linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+            );
+
+            font-size: 19px;
+
+            box-shadow: 0 8px 22px rgba(37, 99, 235, 0.35);
+
+        }
+
+        /* ================= TITLE ================= */
+
+        .title {
+
+            text-align: center;
+
+        }
+
+        .title h2 {
+
+            color: #f8fafc;
+
+            font-size: 29px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.5px;
+
+        }
+
+        .title p {
+
+            margin-top: 8px;
+
+            margin-bottom: 25px;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+        }
+
+        /* ================= ERROR ================= */
+
+        .error-message {
+
+            display: none;
+
+            margin-bottom: 20px;
+
+            padding: 12px;
+
+            border: 1px solid rgba(248, 113, 113, 0.25);
+
+            border-radius: 8px;
+
+            color: #fca5a5;
+
+            background: rgba(127, 29, 29, 0.25);
+
+            font-size: 11px;
+
+            text-align: center;
+
+        }
+
+        /* ================= INPUT ================= */
+
+        .input-group {
+
+            margin-bottom: 22px;
+
+        }
+
+        .input-group label {
+
+            display: block;
+
+            margin-bottom: 9px;
+
+            color: #cbd5e1;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.4px;
+
+        }
+
+        .input-wrapper {
+
+            position: relative;
+
+        }
+
+        .input-wrapper input {
+
+            width: 100%;
+
+            height: 54px;
+
+            padding: 0 45px;
+
+            outline: none;
+
+            border: 1px solid #334155;
+
+            border-radius: 9px;
+
+            color: #f8fafc;
+
+            background: #111827;
+
+            font-size: 12px;
+
+            transition: 0.25s;
+
+        }
+
+        .input-wrapper input:focus {
+
+            border-color: #3b82f6;
+
+            background: #0f172a;
+
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
+
+        }
+
+        .input-wrapper input::placeholder {
+
+            color: #64748b;
+
+        }
+
+        .input-icon {
+
+            position: absolute;
+
+            top: 50%;
+
+            left: 16px;
+
+            transform: translateY(-50%);
+
+            color: #64748b;
+
+            font-size: 13px;
+
+        }
+
+        .show-password {
+
+            position: absolute;
+
+            top: 50%;
+
+            right: 16px;
+
+            transform: translateY(-50%);
+
+            color: #64748b;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+        }
+
+        .show-password:hover {
+
+            color: #60a5fa;
+
+        }
+
+        /* ================= OPTIONS ================= */
+
+        .options {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-top: 4px;
+
+            margin-bottom: 26px;
+
+            font-size: 10px;
+
+        }
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #94a3b8;
+
+        }
+
+        .remember input {
+
+            accent-color: #3b82f6;
+
+        }
+
+        .forgot {
+
+            color: #60a5fa;
+
+            text-decoration: none;
+
+        }
+
+        .forgot:hover {
+
+            color: #93c5fd;
+
+        }
+
+        /* ================= LOGIN BUTTON ================= */
+
+        .login-btn {
+
+            width: 100%;
+
+            height: 54px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            color: white;
+
+            background: linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+            );
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow: 0 10px 24px rgba(37, 99, 235, 0.25);
+
+            transition: 0.25s;
+
+        }
+
+        .login-btn:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow: 0 14px 30px rgba(37, 99, 235, 0.38);
+
+        }
+
+        /* ================= DIVIDER ================= */
+
+        .divider {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 32px 0 22px;
+
+            color: #64748b;
+
+            font-size: 9px;
+
+            letter-spacing: 0.5px;
+
+        }
+
+        .divider::before,
+        .divider::after {
+
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background: #334155;
+
+        }
+
+        /* ================= SOCIAL BUTTONS ================= */
+
+        .social-buttons {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 12px;
+
+        }
+
+        .social-btn {
+
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            border: 1px solid #334155;
+
+            border-radius: 9px;
+
+            color: #cbd5e1;
+
+            background: #111827;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+        }
+
+        .social-btn:hover {
+
+            border-color: #64748b;
+
+            background: #1e293b;
+
+        }
+
+        .google i {
+
+            color: #f87171;
+
+        }
+
+        .github i {
+
+            color: #f8fafc;
+
+        }
+
+        /* ================= REGISTER ================= */
+
+        .register {
+
+            margin-top: 34px;
+
+            color: #64748b;
+
+            font-size: 10px;
+
+            text-align: center;
+
+        }
+
+        .register a {
+
+            color: #60a5fa;
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+        }
+
+        .register a:hover {
+
+            color: #93c5fd;
+
+        }
+
+        /* ================= SECURITY ================= */
+
+        .secure {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 6px;
+
+            margin-top: 25px;
+
+            color: #475569;
+
+            font-size: 9px;
+
+        }
+
+        .secure i {
+
+            color: #22c55e;
+
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 520px) {
+
+            body {
+
+                padding: 15px;
+
+            }
+
+            .login-card {
+
+                min-height: auto;
+
+                padding: 38px 25px;
+
+            }
+
+            .logo {
+
+                font-size: 28px;
+
+                font-weight: 800;
+
+                margin-bottom: 20px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="login-card">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        <div class="logo-icon">
+
+            <i class="fas fa-briefcase"></i>
+
+        </div>
+
+        JOBNOVA
+
+    </div>
+
+
+    <!-- TITLE -->
+
+    <div class="title">
+
+        <h2>
+
+            Welcome back
+
+        </h2>
+
+        <p>
+
+            Sign in to continue to your account.
+
+        </p>
+
+    </div>
+
+
+    <!-- ERROR -->
+
+    <div id="errorMessage"
+
+         class="error-message">
+
+        Invalid username or password
+
+    </div>
+
+
+    <!-- LOGIN FORM -->
+
+    <form action="/login"
+
+          method="POST">
+
+
+        <!-- CSRF TOKEN -->
+
+        <input type="hidden"
+
+               th:name="${_csrf.parameterName}"
+
+               th:value="${_csrf.token}">
+
+
+        <!-- USERNAME -->
+
+        <div class="input-group">
+
+            <label>
+
+                USERNAME
+
+            </label>
+
+
+            <div class="input-wrapper">
+
+                <i class="fas fa-user input-icon"></i>
+
+
+                <input type="text"
+
+                       name="username"
+
+                       placeholder="Enter your username"
+
+                       autocomplete="username"
+
+                       required>
+
+            </div>
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="input-group">
+
+            <label>
+
+                PASSWORD
+
+            </label>
+
+
+            <div class="input-wrapper">
+
+                <i class="fas fa-lock input-icon"></i>
+
+
+                <input type="password"
+
+                       id="password"
+
+                       name="password"
+
+                       placeholder="Enter your password"
+
+                       autocomplete="current-password"
+
+                       required>
+
+
+                <i class="fas fa-eye show-password"
+
+                   onclick="togglePassword()">
+
+                </i>
+
+            </div>
+
+        </div>
+
+
+        <!-- OPTIONS -->
+
+        <div class="options">
+
+            <label class="remember">
+
+                <input type="checkbox"
+
+                       name="remember-me">
+
+                Remember me
+
+            </label>
+
+
+        </div>
+
+
+        <!-- LOGIN BUTTON -->
+
+        <button type="submit"
+
+                class="login-btn">
+
+            Sign In
+
+        </button>
+
+    </form>
+
+
+    <!-- DIVIDER -->
+
+    <div class="divider">
+
+        OR CONTINUE WITH
+
+    </div>
+
+
+    <!-- SOCIAL LOGIN -->
+
+    <div class="social-buttons">
+
+
+        <button type="button"
+
+                class="social-btn google"
+
+                onclick="loginWithGoogle()">
+
+            <i class="fab fa-google"></i>
+
+            Google
+
+        </button>
+
+
+        <button type="button"
+
+                class="social-btn github"
+
+                onclick="loginWithGitHub()">
+
+            <i class="fab fa-github"></i>
+
+            GitHub
+
+        </button>
+
+
+    </div>
+
+    <!-- SECURITY -->
+
+    <div class="secure">
+
+        <i class="fas fa-shield-halved"></i>
+
+        Secure login
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+    /* ================= PASSWORD TOGGLE ================= */
+
+    function togglePassword() {
+
+        const password =
+
+            document.getElementById("password");
+
+
+        const eye =
+
+            document.querySelector(".show-password");
+
+
+        if (password.type === "password") {
+
+            password.type = "text";
+
+            eye.classList.remove("fa-eye");
+
+            eye.classList.add("fa-eye-slash");
+
+        } else {
+
+            password.type = "password";
+
+            eye.classList.remove("fa-eye-slash");
+
+            eye.classList.add("fa-eye");
+
+        }
+
+    }
+
+
+    /* ================= GOOGLE LOGIN ================= */
+
+    function loginWithGoogle() {
+
+        window.location.href =
+
+            "/oauth2/authorization/google";
+
+    }
+
+
+    /* ================= GITHUB LOGIN ================= */
+
+    function loginWithGitHub() {
+
+        window.location.href =
+
+            "/oauth2/authorization/github";
+
+    }
+
+
+    /* ================= LOGIN ERROR ================= */
+
+    if (
+
+        window.location.search.includes("error")
+
+    ) {
+
+        document
+
+            .getElementById("errorMessage")
+
+            .style.display = "block";
+
+    }
+
+
+</script>
+
+
+</body>
+
+</html>

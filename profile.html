@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | JOBNOVA</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color:lightblue;
+            color: #0f172a;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #1e40af;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: #475569;
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 600;
+            background: #f1f5f9;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            color: #0f172a;
+            background: #e2e8f0;
+        }
+
+        /* PAGE CONTAINER */
+        .page-container {
+            width: 92%;
+            max-width: 1120px;
+            margin: 32px auto;
+        }
+
+        /* HEADER CARD */
+        .profile-header-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 36px 36px 30px 36px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 10px 15px -3px rgba(0,0,0,0.03);
+            margin-bottom: 24px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .profile-main {
+            display: flex;
+            align-items: flex-start;
+            gap: 28px;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            flex-shrink: 0;
+        }
+
+        .avatar-wrapper img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+            background: #f8fafc;
+        }
+
+        .online-status {
+            position: absolute;
+            right: 6px;
+            bottom: 6px;
+            width: 18px;
+            height: 18px;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            background: #16a34a;
+        }
+
+        .user-details h1 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .role-title {
+            font-size: 15px;
+            color: #2563eb;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .meta-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: 12px;
+            color: #64748b;
+            font-size: 13.5px;
+            font-weight: 500;
+        }
+
+        .meta-info .item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            color: #15803d;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            font-size: 12.5px;
+            font-weight: 700;
+        }
+
+        /* LAYOUT GRID */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 24px;
+        }
+
+        /* SECTION CARDS */
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            color: #2563eb;
+            font-size: 16px;
+        }
+
+        /* SUMMARY TEXT */
+        .summary-text {
+            font-size: 14.5px;
+            color: #334155;
+            line-height: 1.7;
+            font-weight: 450;
+        }
+
+        /* SKILLS */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e293b;
+            transition: all 0.2s ease;
+        }
+
+        .skill-pill:hover {
+            border-color: #cbd5e1;
+            background: #f1f5f9;
+        }
+
+        /* TIMELINE */
+        .timeline-item {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 22px;
+            border-left: 2px solid #e2e8f0;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -6px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #2563eb;
+        }
+
+        .timeline-item h3 {
+            font-size: 15.5px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .timeline-item .institution {
+            font-size: 13.5px;
+            color: #2563eb;
+            font-weight: 600;
+            margin-top: 3px;
+        }
+
+        .timeline-item .period {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 2px;
+            font-weight: 500;
+        }
+
+        .timeline-item .description {
+            font-size: 13.5px;
+            color: #475569;
+            margin-top: 8px;
+            line-height: 1.6;
+        }
+
+        /* QUICK METRICS */
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .info-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            background: #f0f7ff;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            flex-shrink: 0;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .info-value {
+            font-size: 13.5px;
+            color: #0f172a;
+            font-weight: 700;
+            margin-top: 1px;
+        }
+
+        /* STRENGTH CARD */
+        .strength-card {
+            background: #0f172a;
+            color: #ffffff;
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .strength-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .strength-title {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .strength-pct {
+            color: #22c55e;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        .progress-track {
+            height: 6px;
+            background: #334155;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress-fill {
+            width: 100%;
+            height: 100%;
+            background: #22c55e;
+        }
+
+        .strength-note {
+            font-size: 12px;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: 40px;
+            padding: 24px;
+            text-align: center;
+            color: #64748b;
+            font-size: 13px;
+            border-top: 1px solid #e2e8f0;
+            background: #ffffff;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 850px) {
+            .profile-header-card {
+                flex-direction: column;
+                padding: 24px;
+            }
+
+            .profile-main {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .header-actions {
+                align-items: flex-start;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">
+        <i class="fas fa-briefcase"></i> JOBNOVA
+    </div>
+    <a href="home.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
+</nav>
+
+<!-- MAIN CONTAINER -->
+<main class="page-container">
+
+    <!-- HEADER PROFILE CARD -->
+    <div class="profile-header-card">
+        <div class="profile-main">
+            <div class="avatar-wrapper">
+                <img src="/images/Hari.jpeg" alt="K.HariHaran Profile Picture">
+                <span class="online-status"></span>
+            </div>
+            <div class="user-details">
+                <h1>K.HariHaran <i class="fas fa-circle-check" style="color: #2563eb; font-size: 18px;"></i></h1>
+                <div class="role-title">Java FullStack Developer</div>
+
+                <div class="meta-info">
+                    <span class="item"><i class="fas fa-location-dot"></i> Chinnamanur, Tamil Nadu</span>
+                    <span class="item"><i class="fas fa-phone"></i> +91 6379338530</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <div class="status-badge">
+                <i class="fas fa-circle-dot"></i> Open to Work
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT GRID -->
+    <div class="profile-grid">
+
+        <!-- LEFT COLUMN -->
+        <div class="left-column">
+
+            <!-- PROFESSIONAL SUMMARY -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-user-check"></i> Professional Summary
+                </div>
+                <p class="summary-text">
+                    Results-driven <strong>Java FullStack Developer</strong> with strong expertise in building scalable web applications. Proficient in enterprise backend engineering using <strong>Java and Spring Boot</strong>, alongside modern frontend integration. Currently advancing academic specialization through an M.Sc in Computer Science, with a solid commitment to writing clean, maintainable code, robust API architecture, and optimal database structures.
+                </p>
+            </div>
+
+            <!-- KEY TECHNICAL SKILLS -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-code"></i> Technical Skills
+                </div>
+                <div class="skills-container">
+                    <div class="skill-pill"><i class="fab fa-java" style="color:#f89820;"></i> Java </div>
+                    <div class="skill-pill"><i class="fas fa-leaf" style="color:#6db33f;"></i> Spring Boot</div>
+                    <div class="skill-pill"><i class="fab fa-html5" style="color:#e34f26;"></i> HTML & CSS</div>
+                    <div class="skill-pill"><i class="fab fa-js-square" style="color:#f7df1e;"></i> JavaScript</div>
+                    <div class="skill-pill"><i class="fas fa-database" style="color:#00758f;"></i> SQL</div>
+                </div>
+            </div>
+
+            <!-- PROJECTS -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-laptop-code"></i> Key Projects
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3>JOBNOVA - Enterprise Job Portal System</h3>
+                    <div class="institution">Java · Spring Boot · Web Technologies · SQL</div>
+                    <div class="period">2026</div>
+                    <p class="description">
+                        Designed and implemented an end-to-end web platform connecting recruiters with candidates. Features include dynamic job searching with multi-parameter filters, candidate dashboard analytics, secure user profile strength indicators, and responsive UI layout across mobile and web interfaces.
+                    </p>
+                </div>
+            </div>
+
+            <!-- EDUCATION -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-graduation-cap"></i> Education
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3>M.Sc Computer Science</h3>
+                    <div class="institution">Nadar Mahajana Sangam S. Vellaichamy Nadar College, Madurai</div>
+                    <div class="period">2024 - 2026</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3>B.Sc Computer Science</h3>
+                    <div class="institution">Hajee Karutha Rowther Howdia College (Autonomous), Uthamapalayam</div>
+                    <div class="period">2021 - 2024</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="right-column">
+
+            <!-- CONTACT DETAILS CARD -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-address-card"></i> Profile Overview
+                </div>
+                <div class="info-list">
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <div class="info-label">Contact Number</div>
+                            <div class="info-value">+91 6379338530</div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-location-dot"></i></div>
+                        <div>
+                            <div class="info-label">Location</div>
+                            <div class="info-value">Chinnamanur, Tamil Nadu</div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-briefcase"></i></div>
+                        <div>
+                            <div class="info-label">Specialization</div>
+                            <div class="info-value">Java FullStack</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROFILE STRENGTH -->
+            <div class="strength-card">
+                <div class="strength-header">
+                    <span class="strength-title">Profile Completion</span>
+                    <span class="strength-pct">100%</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill"></div>
+                </div>
+                <p class="strength-note"><i class="fas fa-circle-check" style="color:#22c55e;"></i> Complete profile status boosts candidate visibility to potential recruiters.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+    &copy; 2026 JOBNOVA · Professional Candidate Network
+</footer>
+
+</body>
+</html>

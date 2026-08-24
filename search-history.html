@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Search History | JOBNOVA</title>
+
+    <style>
+
+        * {
+
+            box-sizing: border-box;
+
+            font-family: Arial, sans-serif;
+
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background: #f1f5f9;
+
+            color: #1e293b;
+
+        }
+
+
+        .navbar {
+
+            background: white;
+
+            padding: 20px 8%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-bottom: 1px solid #ddd;
+
+        }
+
+
+        .logo {
+
+            color: #2563eb;
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+        }
+
+
+        .back {
+
+            text-decoration: none;
+
+            color: #2563eb;
+
+            font-weight: bold;
+
+        }
+
+
+        .container {
+
+            width: 90%;
+
+            max-width: 900px;
+
+            margin: 35px auto;
+
+        }
+
+
+        h1 {
+
+            color: #0f172a;
+
+        }
+
+
+        .history-card {
+
+            background: white;
+
+            padding: 20px;
+
+            margin: 15px 0;
+
+            border-radius: 12px;
+
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+        }
+
+
+        .history-info {
+
+            display: flex;
+
+            gap: 15px;
+
+            align-items: center;
+
+        }
+
+
+        .history-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 20px;
+
+        }
+
+
+        .history-info h3 {
+
+            margin: 0;
+
+            color: #334155;
+
+        }
+
+
+        .history-info p {
+
+            margin: 6px 0 0;
+
+            color: #64748b;
+
+            font-size: 14px;
+
+        }
+
+
+        .date {
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            margin-top: 5px;
+
+        }
+
+
+        .search-again {
+
+            padding: 9px 14px;
+
+            background: #2563eb;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+        }
+
+
+        .search-again:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        .delete-btn {
+
+            margin-left: 8px;
+
+            padding: 9px 14px;
+
+            background: #fee2e2;
+
+            color: #dc2626;
+
+            border: none;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+        }
+
+
+        .delete-btn:hover {
+
+            background: #dc2626;
+
+            color: white;
+
+        }
+
+
+        .clear-btn {
+
+            padding: 11px 18px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #dc2626;
+
+            color: white;
+
+            cursor: pointer;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .empty {
+
+            background: white;
+
+            padding: 50px;
+
+            text-align: center;
+
+            border-radius: 12px;
+
+            color: #64748b;
+
+            font-size: 18px;
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .history-card {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 15px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        💼 JOBNOVA
+
+    </div>
+
+
+    <a href="home.html"
+       class="back">
+
+        ← Back to Home
+
+    </a>
+
+</nav>
+
+
+<div class="container">
+
+
+    <h1>
+
+        🔍 Search History
+
+    </h1>
+
+
+    <button class="clear-btn"
+            onclick="clearHistory()">
+
+        🗑 Clear All History
+
+    </button>
+
+
+    <div id="historyContainer">
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+    function loadHistory() {
+
+
+        const history =
+
+            JSON.parse(
+                localStorage.getItem(
+                    "searchHistory"
+                )
+            ) || [];
+
+
+        const container =
+
+            document.getElementById(
+                "historyContainer"
+            );
+
+
+        if (history.length === 0) {
+
+
+            container.innerHTML = `
+
+                <div class="empty">
+
+                    🔍 No search history found.
+
+                    <br><br>
+
+                    Search for a job to see your history here.
+
+                </div>
+
+            `;
+
+
+            return;
+
+        }
+
+
+        container.innerHTML =
+
+
+            history.map(
+                (item, index) => `
+
+
+                    <div class="history-card">
+
+
+                        <div class="history-info">
+
+
+                            <div class="history-icon">
+
+                                🔍
+
+                            </div>
+
+
+                            <div>
+
+
+                                <h3>
+
+                                    ${item.keyword}
+
+                                </h3>
+
+
+                                <p>
+
+                                    📍 ${item.location}
+
+                                </p>
+
+
+                                <div class="date">
+
+                                    🕒 ${item.searchedAt}
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div>
+
+
+                            <button
+
+                                class="search-again"
+
+                                onclick="searchAgain(${index})">
+
+                                Search Again
+
+                            </button>
+
+
+                            <button
+
+                                class="delete-btn"
+
+                                onclick="deleteHistory(${index})">
+
+                                Delete
+
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+
+                `
+            )
+
+                .join("");
+
+    }
+
+
+    function searchAgain(index) {
+
+
+        const history =
+
+            JSON.parse(
+                localStorage.getItem(
+                    "searchHistory"
+                )
+            ) || [];
+
+
+        const item = history[index];
+
+
+        window.location.href =
+
+            "jobs.html?search=" +
+
+            encodeURIComponent(
+                item.keyword === "Any Job"
+
+                    ? ""
+
+                    : item.keyword
+            ) +
+
+            "&location=" +
+
+            encodeURIComponent(
+                item.location === "Any Location"
+
+                    ? ""
+
+                    : item.location
+            );
+
+    }
+
+
+    function deleteHistory(index) {
+
+
+        let history =
+
+            JSON.parse(
+                localStorage.getItem(
+                    "searchHistory"
+                )
+            ) || [];
+
+
+        history.splice(index, 1);
+
+
+        localStorage.setItem(
+            "searchHistory",
+
+            JSON.stringify(history)
+        );
+
+
+        loadHistory();
+
+    }
+
+
+    function clearHistory() {
+
+
+        if (
+
+            confirm(
+                "Clear all search history?"
+            )
+
+        ) {
+
+
+            localStorage.removeItem(
+                "searchHistory"
+            );
+
+
+            loadHistory();
+
+        }
+
+    }
+
+
+    loadHistory();
+
+
+</script>
+
+</body>
+
+</html>
